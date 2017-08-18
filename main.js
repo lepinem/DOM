@@ -85,16 +85,64 @@ let formData = [
 // HINTS:
 // As you can see, we access the first element in the array
 // with [0] and then grab the property "label" using the "." operator
-( function(){
-  // Select the first element from the array
-  let first = formData[ 0 ];
-  // Log the first object
-  console.log( first );
-  // Log the string "First Name"
-  console.log( first.label );
-} )();
-
+// ( function(){
+//   // Select the first element from the array
+//   let first = formData[ 0 ];
+//   // Log the first object
+//   console.log( first );
+//   // Log the string "First Name"
+//   console.log( first.label );
+// } )();
 
 // -------- Your Code Goes Below this Line --------
 
+const inputs = [];
+const selects = [];
+const textareas = [];
+const formFields = document.getElementById('#fields');
+var inputInfo = "";
+var selectInfo = "";
+var optionsInfo = "";
+var textInfo = "";
 
+for (let i = 0; i < formData.length; i++) {
+  if (formData[i].type === 'textarea') {
+    renderText(textInfo);
+  } else if (formData[i].type === 'select') {
+    renderSelect(selectInfo);
+      for (let j = 0; j < formData[i].options.length; j++) {
+        renderOptions(optionsInfo);
+      }
+  } else {
+    renderInput(inputInfo);
+  }
+
+  function renderInput() {
+    let inputInfo = document.createElement('input');
+    fields.appendChild(inputInfo);
+    inputInfo.setAttribute('type', formData[i].type);
+    inputInfo.setAttribute('id', formData[i].id);
+    inputInfo.setAttribute('label', formData[i].label);
+    return inputInfo
+  }
+  function renderSelect() {
+    let selectInfo = document.createElement('select');
+    fields.appendChild(selectInfo);
+    selectInfo.setAttribute('placeholder', "English");
+    return selectInfo
+  }
+  function renderOptions() {
+    let optionsInfo = document.createElement('option');
+    selectInfo.appendChild(optionsInfo);
+    optionsInfo.setAttribute('label', formDat[i].options[j].label);
+    optionsInfo.setAttribute('name', formData[i].options[j].name);
+    return optionsInfo
+  }
+  function renderText() {
+    let textInfo = document.createElement('textarea');
+    fields.appendChild(textInfo);
+    textInfo.setAttribute('placeholder', "Your comment...");
+    return textInfo
+  }
+   console.log(inputInfo);
+}
