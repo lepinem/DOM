@@ -100,49 +100,50 @@ const inputs = [];
 const selects = [];
 const textareas = [];
 const formFields = document.getElementById('#fields');
-var inputInfo = "";
 var selectInfo = "";
 var optionsInfo = "";
 var textInfo = "";
 
 for (let i = 0; i < formData.length; i++) {
   if (formData[i].type === 'textarea') {
-    renderText(textInfo);
+    let textData = formData[i]
+    renderText(textData);
   } else if (formData[i].type === 'select') {
-    renderSelect(selectInfo);
-      for (let j = 0; j < formData[i].options.length; j++) {
-        renderOptions(optionsInfo);
-      }
+    let selectData = formData[i]
+    renderSelect(selectData);
+      // for (let j = 0; j < formData[i].options.length; j++) {
+
+      //   renderOptions(optionsInfo);
+      // }
   } else {
-    renderInput(inputInfo);
+    let inputData = formData[i]
+    renderInput(inputData);
   }
 
   function renderInput() {
-    let inputInfo = document.createElement('input');
-    fields.appendChild(inputInfo);
-    inputInfo.setAttribute('type', formData[i].type);
-    inputInfo.setAttribute('id', formData[i].id);
-    inputInfo.setAttribute('label', formData[i].label);
-    return inputInfo
+    let inputElement = document.createElement('input');
+    fields.appendChild(inputElement);
+    inputElement.setAttribute('type', inputData.type);
+    inputElement.setAttribute('id', inputData.id);
+    inputElement.setAttribute('label', inputData.label);
   }
   function renderSelect() {
-    let selectInfo = document.createElement('select');
-    fields.appendChild(selectInfo);
+    let selectElement = document.createElement('select');
+    fields.appendChild(selectElement);
     selectInfo.setAttribute('placeholder', "English");
-    return selectInfo
   }
   function renderOptions() {
-    let optionsInfo = document.createElement('option');
-    selectInfo.appendChild(optionsInfo);
-    optionsInfo.setAttribute('label', formDat[i].options[j].label);
+    let optionsElement = document.createElement('option');
+    let selectElement = document.querySelector('select')
+    selectElement.appendChild(optionsElement);
+    optionsInfo.setAttribute('label', formData[i].options[j].label);
     optionsInfo.setAttribute('name', formData[i].options[j].name);
-    return optionsInfo
   }
-  function renderText() {
-    let textInfo = document.createElement('textarea');
-    fields.appendChild(textInfo);
-    textInfo.setAttribute('placeholder', "Your comment...");
-    return textInfo
+  function renderText(textData) {
+    let textElement = document.createElement('textarea');
+    fields.appendChild();
+    textElemnt.setAttribute('placeholder', "Your comment...");
+    return textElement
   }
-   console.log(inputInfo);
+   console.log(inputData);
 }
